@@ -1,0 +1,14 @@
+.wrapter-user-info{
+  border-radius: 5px;
+  border: 1px solid #DDDDDD;
+}
+
+.title-user-info{
+  font-weight: bold;
+  background-color: #EEEEEE;
+  padding: 10px 10px;
+}
+
+.content-user-info{
+	padding: 10px 10px;
+}
