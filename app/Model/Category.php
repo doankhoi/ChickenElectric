@@ -11,5 +11,14 @@ class Category extends AppModel{
 			'dependent' => true
 		]
 	];
+
+	public $validate = [
+		'name'=>[
+			'not empty' => [
+				'rule'=>'notBlank',
+				'message'=>'Trường tiêu đề không được trống'
+			]
+		]
+	];
 	
 }

@@ -4,7 +4,7 @@ class Article extends AppModel {
 
 	var $name = "Article";
 	var $primaryKey = 'id';
-	public $belongTo = [
+	public $belongsTo = [
 		'Category'=>[
 			'className'=>'Category',
 			'foreignKey'=>'id'

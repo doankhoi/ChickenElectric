@@ -6,17 +6,25 @@ App::uses('AppController', 'Controller');
 class ArticlesController extends AppController {
 
 	var $name = "Articles";
-	var $uses = ['Article', 'Category'];
+	var $uses = ['Article', 'Category', 'User'];
 	var $layout = 'dashboard';
 	var $paginate =  array();
 	var $helpers = ['Session', 'Paginator', 'Flash'];
 	var $components = ['Session', 'RequestHandler', 'Flash'];
 
 	public function admin_index(){
-		
+		$this->paginate = [
+			'conditions'=>['Article.active'=>1],
+			'limit'=>10,
+			'order'=>['created'=>'desc']
+		];
+
+		$data = $this->paginate('Article');
+		$this->set('articles', $data);
 	}
 
 	public function admin_add(){
+
 		$cates = $this->_getAllCategories();
 		$this->set('cates', $cates);
 

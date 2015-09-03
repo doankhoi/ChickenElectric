@@ -11,9 +11,10 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Stt</th>
+                <th>STT</th>
                 <th><?= $this->Paginator->sort('title', 'Tiêu đề') ?></th>
                 <th><?= $this->Paginator->sort('category_id', 'Thể loại') ?></th>
+                <th>Xuất bản</th>
                 <th><?= $this->Paginator->sort('created', 'Ngày tạo') ?></th>
                 <th><?= $this->Paginator->sort('modified', 'Ngày chỉnh sửa') ?></th>
                 <th>Thao tác</th>
@@ -24,23 +25,31 @@
             <?php $stt = 1; foreach ($articles as $article): ?>
             <tr>
                 <td><?= $this->Number->format($stt) ?></td>
-                <td><?= h($article->title)?></td>
-                <td><?= h($article->created) ?></td>
-                <td><?= h($article->modified) ?></td>
+                <td><?= h($article['Article']['title'])?></td>
+                <td><?= h($article['Category']['name'])?></td>
                 <td>
-                    <?=$this->Html->link(
-                        $this->Html->tag('span','',['class'=>'glyphicon glyphicon-pencil']),
-                        ['controller'=>'articles', 'action'=>'edit', h($article->id)],
-                        ['escape'=>false, 'title'=>'Chỉnh sửa bài viết']);
+                    <?php 
+                        if($article['Article']['status'] == 1){
+                            echo $this->Html->link('Ẩn', ['controller'=>'articles', 'action'=>'publish', $article['Article']['id']]);
+                        }else{
+                            echo $this->Html->link('Hiện', ['controller'=>'articles', 'action'=>'publish', $article['Article']['id']]);
+                        }
                     ?>
-                    <?=$this->Html->link(
-                        $this->Html->tag('span', '',['class'=>'glyphicon glyphicon-eye-open']),
-                        ['prefix'=>false, 'controller'=>'articles', 'action'=>'view', h($article->id)],
-                        ['escape' => false, 'title'=>'Xem chi tiết'])?>
-                    <?=$this->Form->postLink(
-                        $this->Html->tag('span','',['class'=>'glyphicon glyphicon-remove']),
-                        ['controller'=>'articles', 'action'=>'delete', h($article->id)],
-                        ['escape'=>false, 'title'=>'Xóa bài viết', 'confirm'=>'Bạn chắc chắn muốn xóa ?']);
+                </td>
+                <td><?= h($article['Article']['created']) ?></td>
+                <td><?= h($article['Article']['modified']) ?></td>
+                <td>
+                    <?=$this->Html->link('chi tiết',
+                        ['prefix'=>false, 'controller'=>'articles', 'action'=>'view', h($article['Article']['id'])],
+                        ['title'=>'Xem chi tiết'])
+                    ?>
+                    <?=$this->Html->link('chỉnh sửa',
+                        ['controller'=>'articles', 'action'=>'edit', h($article['Article']['id'])],
+                        ['title'=>'Chỉnh sửa bài viết']);
+                    ?>
+                    <?=$this->Form->postLink('deactive',
+                        ['controller'=>'articles', 'action'=>'delete', h($article['Article']['id'])],
+                        ['title'=>'Xóa bài viết', 'confirm'=>'Bạn chắc chắn muốn xóa ?']);
                     ?>
                 </td>
             </tr>

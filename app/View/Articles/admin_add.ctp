@@ -6,6 +6,15 @@
  	$this->end();
  ?>
 
+<style type="text/css">
+  
+  .control-label{
+    background: #EEEEEE;
+  }
+  
+</style>
+
+
 <?=$this->Form->create(['type'=>'file', 'class'=>'form-horizontal', 'role'=>'form'])?>
 	<div class="form-group">
       <label class="col-sm-2 control-label">Chủ đề</label>
@@ -21,6 +30,13 @@
       </div>
    	</div>
    
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Tóm tắt nội dung</label>
+      <div class="col-sm-10">
+        <?=$this->Form->textarea('description', ['class'=>'form-control', 'label'=>false])?>
+      </div>
+    </div>
+
    	<div class="form-group">
       	<label class="col-sm-2 control-label">Nội dung</label>
       	<div class="col-sm-10">

@@ -350,7 +350,23 @@
  *       Please check the comments in bootstrap.php for more info on the cache engines available
  *       and their settings.
  */
+
+//Cấu hình memcahe
 $engine = 'File';
+
+// Cache::config('default', array(
+//  	'engine' => 'Memcached', //[required]
+//  	'duration' => 3600, //[optional]
+//  	'probability' => 100, //[optional]
+//   		'prefix' => Inflector::slug(APP_DIR) . '_', //[optional]  prefix every cache file with this string
+//  	'servers' => array(
+//  	'127.0.0.1' // localhost, default port 11211
+//  		), //[optional]
+//  	'persistent' => true, // [optional] The name of the persistent connection.
+//  	'compress' => false, // [optional] compress data in Memcached (slower, but uses less memory)
+//  ));
+
+ //Cấu hình memcache
 
 // In development mode, caches should expire quickly.
 $duration = '+999 days';
