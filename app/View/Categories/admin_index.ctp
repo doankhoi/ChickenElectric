@@ -6,7 +6,12 @@ $this->start('sidebar_dashboard');
 echo $this->element('sidebar_categories');
 $this->end();
 ?>
-
+<style type="text/css">
+    td img{
+        height:  100px;
+        width: 150px;
+    }
+</style>
 
 <div class="table-responsive">
     <table class="table table-striped">
@@ -15,6 +20,7 @@ $this->end();
                 <th>STT</th>
                 <th><?= $this->Paginator->sort('name', 'Tên') ?></th>
                 <th><?= $this->Paginator->sort('status','Xuất bản')?></th>
+                <th><?= $this->Paginator->sort('image', 'Ảnh đại diện')?></th>
                 <th><?= $this->Paginator->sort('created', 'Ngày tạo') ?></th>
                 <th><?= $this->Paginator->sort('modified', 'Ngày chỉnh sửa') ?></th>
                 <th>Thao tác</th>
@@ -34,6 +40,15 @@ $this->end();
                             echo $this->Form->postLink('Hiện', ['controller'=>'categories', 'action'=>'showhide', $category['Category']['id']]);
                         }
                     ?>
+                </td>
+                <td>
+                <?php
+                    if($category['Category']['image'] == ''){
+                        echo "Chưa có";
+                    }else{
+                        echo $this->Html->image('gallery/'.$category['Category']['image']);
+                    }
+                ?>
                 </td>
                 <td><?= $category['Category']['created']  ?></td>
                 <td><?= $category['Category']['modified']  ?></td>

@@ -24,9 +24,9 @@
  </div>
 
  <div class="col-xs-6 col-sm-3 placeholder">
-  <span class="glyphicon glyphicon-comment"></span>
+  <span class="glyphicon glyphicon-picture"></span>
   <!-- <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail"> -->
-  <h4><?=$this->Html->link('Quản lý bình luận', ['controller'=>'comments', 'action'=>'index'])?></h4>
+  <h4><?=$this->Html->link('Quản lý slideshow', ['controller'=>'galleries', 'action'=>'index', 0])?></h4>
   <span class="text-muted">-------***------</span>
 </div>
 

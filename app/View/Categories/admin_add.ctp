@@ -11,7 +11,7 @@ $this->end();
     }
 </style>
 <div>
-    <?= $this->Form->create('Category',['class'=>'form-horizontal', 'role'=>'form']) ?>
+    <?= $this->Form->create('Category',['type'=>'file','class'=>'form-horizontal', 'role'=>'form']) ?>
         <div class="form-group">
             <label for="name" class="col-sm-2 control-label">Tiêu đề</label>
             <div class="col-sm-10">
@@ -37,6 +37,13 @@ $this->end();
             <label for="sub" class="col-sm-2 control-label">Thư mục cha</label>
             <div class="col-sm-10">
                 <?=$this->Form->select('sub',$sb,array('empty'=>array(''=>"--Main--"), 'class'=>'form-control'));?>  
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="sub" class="col-sm-2 control-label">Ảnh đại diện</label>
+            <div class="col-sm-10">
+                <?=$this->Form->file('image',['label'=>false, 'class'=>'form-control']);?>  
             </div>
         </div>
 

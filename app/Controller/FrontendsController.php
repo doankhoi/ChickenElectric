@@ -25,6 +25,15 @@ class FrontendsController extends AppController
 		]);
 		
 		$this->set('cates', $cates);
+
+		$galleries = $this->Gallery->find('all', [
+			'conditions'=>[
+				'active'=>1,
+				'type'=>0
+			]
+		]);
+
+		$this->set('galleries', $galleries);
 	}
 	
 	public function listcate($cateId = null){

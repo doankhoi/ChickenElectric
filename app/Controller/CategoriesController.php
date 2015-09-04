@@ -7,6 +7,7 @@ class CategoriesController extends AppController {
 
 	var $name = "Categories";
 	var $layout = "dashboard";
+	var $components = ['Upload'];
 
 	public function beforeFilter(){
 		parent::beforeFilter();
@@ -31,6 +32,22 @@ class CategoriesController extends AppController {
                                         ))));
 
 		if($this->request->is('post')){
+
+			$arrParam = $this->request->data;
+            $file = $arrParam['Category']['image'];                                
+            $destination = WWW_ROOT . 'img' . DS . 'gallery' . DS;
+            if(empty($file['name'])){
+                $arrParam['Category']['image'] = '';
+           	}else{
+                $this->Upload->upload($file, $destination, null, null, null);
+                if($this->Upload->errors){
+                    $this->Session->setFlash( implode('<br />',$this->Upload->errors) );
+                    $this->redirect(['controller'=>'categories', 'action'=>'add']);                        
+                }else{
+                    $arrParam['Category']['image'] = $this->Upload->result;
+                }
+            }
+
 			$this->Category->set('status',1);
 			$this->Category->set('active',1);
 			if($this->request->data['Category']['sub'] == ''){
@@ -52,14 +69,37 @@ class CategoriesController extends AppController {
                                         'Category.sub'=>0,
                                         'active'=>1
                                         ))));
-		$cate = $this->Category->find('first', ['conditions'=>['id'=>$id], 'recursive'=>-1]);
+		$cate = $this->Category->find('first', [
+			'conditions'=>['id'=>$id], 
+			'recursive'=>-1
+		]);
+
 		if($cate['Category']['id'] == ''){
 			$this->redirect(['action'=>'index']);
 		}
 
 		$this->set('cate', $cate);
+
 		if($this->request->is('post')){
+
+			$now = date('Y:m:d h:i:s');
 			$this->Category->set('id', $id);
+			$this->Category->set('modified', $now);
+
+			$file = $this->request->data['Category']['image'];                                
+            $destination = WWW_ROOT . 'img' . DS . 'gallery' . DS;
+            if(empty($file['name'])){
+                $this->request->data['Category']['image'] = $cate['Category']['image'];
+           	}else{
+                $this->Upload->upload($file, $destination, null, null, null);
+                if($this->Upload->errors){
+                    $this->Session->setFlash( implode('<br />',$this->Upload->errors) );
+                    $this->redirect(['controller'=>'categories', 'action'=>'add']);                        
+                }else{
+                    $this->request->data['Category']['image'] = $this->Upload->result;
+                }
+            }
+
 			if($this->Category->save($this->request->data)){
 				$this->redirect(['action'=>'index']);
 			}

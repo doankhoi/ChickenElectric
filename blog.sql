@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 04, 2015 at 05:49 AM
+-- Generation Time: Sep 04, 2015 at 12:47 PM
 -- Server version: 5.6.25
 -- PHP Version: 5.6.11
 
@@ -166,17 +166,18 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `link` varchar(300) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime DEFAULT NULL,
-  `description` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+  `description` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `image` varchar(200) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`id`, `name`, `sub`, `status`, `active`, `link`, `created`, `modified`, `description`) VALUES
-(5, 'Coder', 0, 1, 1, '', '2015-09-03 12:31:42', '2015-09-04 05:36:38', '<p>Chia sẻ kiến thức lập tr&igrave;nh, học tập.</p>'),
-(6, 'Suy ngẫm', 0, 1, 1, '', '2015-09-03 05:26:42', '2015-09-03 05:26:42', ''),
-(7, 'Tào lao', 0, 1, 1, '', '2015-09-03 05:27:11', '2015-09-03 05:27:11', '');
+INSERT INTO `categories` (`id`, `name`, `sub`, `status`, `active`, `link`, `created`, `modified`, `description`, `image`) VALUES
+(5, 'Coder', 0, 1, 1, '', '2015-09-03 12:31:42', '2015-09-04 12:46:00', '<p>Chia sáº» kiáº¿n thá»©c láº­p tr&igrave;nh v&agrave; há»c táº­p.</p>', 'i684NR77vi.jpg'),
+(8, 'Suy ngáº«m', 0, 1, 1, '', '2015-09-04 08:40:18', '2015-09-04 12:35:14', '<p>Chia sáº» c&aacute;c b&agrave;i viáº¿t &yacute; nghÄ©a vá» cuá»™c sá»‘ng v&agrave; c&ocirc;ng viá»‡c.</p>', 'YgzNkbUsg8.jpg'),
+(9, 'TÃ o lao', 0, 1, 1, '', '2015-09-04 08:41:08', '2015-09-04 12:28:03', '<p>C&aacute;c b&agrave;i viáº¿t vá» táº¥t cáº£ c&aacute;c chá»§ Ä‘á» m&agrave; Ä‘&aacute;ng quan t&acirc;m.</p>', 'usq5plTbxk.jpg');
 
 -- --------------------------------------------------------
 
@@ -209,7 +210,16 @@ CREATE TABLE IF NOT EXISTS `galleries` (
   `active` tinyint(4) DEFAULT NULL,
   `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `link` varchar(200) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `galleries`
+--
+
+INSERT INTO `galleries` (`id`, `images`, `title`, `type`, `ordered`, `created`, `modified`, `active`, `description`, `link`) VALUES
+(2, 'e9vMqZTd9V.jpg', 'CÃ¹ng nhau luyá»‡n táº­p code cazy.', 0, 1, '2015-09-04 10:43:22', '2015-09-04 11:48:15', 1, '<p>Tháº£o luáº­n c&aacute;c váº¥n Ä‘á» vá» code v&agrave; c&aacute;c ng&ocirc;n ngá»¯ láº­p tr&igrave;nh.</p>', 'http://book.cakephp.org/2.0/en/core-libraries/helpers/form.html'),
+(3, 'NpD3uLJfHp.jpg', 'Suy ngáº«m vá» bÃ i há»c hÃ´m nay', 0, 2, '2015-09-04 10:54:54', '2015-09-04 10:54:54', 1, '<p>Tham gia tháº£o luáº­n Ä‘á»ƒ c&ugrave;ng nhau tiáº¿n bá»™</p>', ''),
+(4, 'aQrI6Huepb.jpg', 'CÃ¡c chuyá»‡n táº§m phÃ o trong cuá»™c sá»‘ng', 0, 3, '2015-09-04 10:56:18', '2015-09-04 10:56:18', 1, '<p>B&ecirc;n cáº¡nh há»c h&agrave;nh l&agrave; c&aacute;c chÆ°Æ¡ng tr&igrave;nh giáº£i tr&iacute;.</p>', '');
 
 -- --------------------------------------------------------
 
@@ -359,7 +369,7 @@ ALTER TABLE `audits`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `comments`
 --
@@ -369,7 +379,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `galleries`
 --
 ALTER TABLE `galleries`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `users`
 --

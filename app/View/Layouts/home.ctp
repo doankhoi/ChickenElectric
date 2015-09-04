@@ -58,40 +58,44 @@
         <li data-target="#myCarousel" data-slide-to="1"></li>
         <li data-target="#myCarousel" data-slide-to="2"></li>
       </ol>
+
       <div class="carousel-inner" role="listbox">
 
-        <div class="item active">
-          <?=$this->Html->image('slider1.jpg', ['class'=>'first-slide'])?>
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>Example headline.</h1>
-              <p>Note: If you're viewing this page via a <code>file://</code> URL, the "next" and "previous" Glyphicon buttons on the left and right might not load/display properly due to web browser security rules.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
-            </div>
-          </div>
-        </div>
+        <?php $flag = true; foreach ($galleries as $gallery): ?>
 
-        <div class="item">
-          <?=$this->Html->image('slider2.jpg', ['class'=>'second-slide'])?>
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>Another example headline.</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
-            </div>
-          </div>
-        </div>
+          <?php if($flag):?>
+              <div class="item active">
+                <?=$this->Html->image('gallery/'.$gallery['Gallery']['images'])?>
+                <div class="container">
+                  <div class="carousel-caption">
+                    <h1><?=$gallery['Gallery']['title']?></h1>
+                    <p><?=$gallery['Gallery']['description']?></p>
+                    <?php 
+                      if($gallery['Gallery']['link'] != ''){
+                        echo '<p><a class="btn btn-lg btn-primary" target="_blank" href="'.$gallery['Gallery']['link'].'" role="button">Sign up today</a></p>';
+                      }
+                    ?>
+                  </div>
+                </div>
+              </div>
+          <?php $flag = false; else:?>
+              <div class="item">
+                <?=$this->Html->image('gallery/'.$gallery['Gallery']['images'])?>
+                <div class="container">
+                  <div class="carousel-caption">
+                    <h1><?=$gallery['Gallery']['title']?></h1>
+                    <p><?=$gallery['Gallery']['description']?></p>
+                    <?php 
+                      if($gallery['Gallery']['link'] != ''){
+                        echo '<p><a class="btn btn-lg btn-primary" target="_blank" href="'.$gallery['Gallery']['link'].'" role="button">Sign up today</a></p>';
+                      }
+                    ?>
+                  </div>
+                </div>
+              </div>
+          <?php endif;?>
 
-        <div class="item">
-          <?=$this->Html->image('slider3.jpg', ['class'=>'third-slide'])?>
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>One more for good measure.</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
-            </div>
-          </div>
-        </div>
+        <?php endforeach;?>
 
       </div>
 
@@ -115,24 +119,16 @@
 
       <!-- Three columns of text below the carousel -->
       <div class="row">
-        <div class="col-lg-4">
-            <?=$this->Html->image('slider1.jpg', ['class'=>'img-circle item-header', 'alt'=>'Coder'])?>
-          <h2>Coder</h2>
-          <p>Chia sẻ kiến thức lập trình, học tập.</p>
-          <p><?=$this->Html->link('View details &raquo;', ['controller'=>'articles', 'action'=>'index', 'cat'=>'coder'], ['class'=>'btn btn-default', 'escape' => false])?></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-            <?=$this->Html->image('slider2.jpg', ['class'=>'img-circle item-header', 'alt'=>'Chia sẻ'])?>
-          <h2>Suy ngẫm</h2>
-          <p>Các bài viết về cuộc sống hàng ngày.</p>
-          <p><p><?=$this->Html->link('View details &raquo;', ['controller'=>'articles', 'action'=>'index', 'cat'=>'coder'], ['class'=>'btn btn-default', 'escape' => false])?></p></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-            <?=$this->Html->image('slider3.jpg', ['class'=>'img-circle item-header', 'alt'=>'Tào lao'])?>
-          <h2>Tào lao</h2>
-          <p>Các bài viết hữu ích trên mạng.</p>
-          <?=$this->Html->link('View detai &raquo;', ['controller'=>'articles', 'action'=>'index', 'cat'=>'tào lao'], ['class' => 'btn btn-default', 'escape'=>false])?>
-        </div><!-- /.col-lg-4 -->
+
+        <?php foreach ($cates as $cate):?>
+          <div class="col-lg-4">
+            <?=$this->Html->image('gallery/'.$cate['Category']['image'], ['class'=>'img-circle item-header', 'alt'=>'Ảnh đại diện'])?>
+            <h2><?=$cate['Category']['name']?></h2>
+            <p><?=$cate['Category']['description']?></p>
+            <p><?=$this->Html->link('View details &raquo;', ['controller'=>'frontends', 'action'=>'listcate', $cate['Category']['id']], ['class'=>'btn btn-default', 'escape' => false])?></p>
+          </div><!-- /.col-lg-4 -->
+        <?php endforeach;?>
+
       </div><!-- /.row -->
 
 
