@@ -39,13 +39,13 @@ $this->end();
                 <td><?= h($user['User']['modified']) ?></td>
                 <td>
                     <?=$this->Html->link(
-                        'chi tiết',
+                        'chi tiết | ',
                         ['controller'=>'users', 'action'=>'view', h($user['User']['id'])]
                     )?>
 
                     <?php if(AuthComponent::user('type') == 'admin'):?>
                     <?=$this->Html->link(
-                        'chỉnh sửa',
+                        'chỉnh sửa | ',
                         ['controller'=>'users', 'action'=>'edit', h($user['User']['id'])]
                     );
                     ?>

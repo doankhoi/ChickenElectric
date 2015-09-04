@@ -1,6 +1,7 @@
+
 <?php
-$this->assign('title', 'Thêm chủ đề');
-$this->assign('sub_header', 'Thêm mới chủ đề');
+$this->assign('title', 'Chỉnh sửa chủ đề');
+$this->assign('sub_header', 'Chỉnh sửa chủ đề');
 $this->start('sidebar_dashboard');
 echo $this->element('sidebar_categories');
 $this->end();
@@ -15,28 +16,28 @@ $this->end();
         <div class="form-group">
             <label for="name" class="col-sm-2 control-label">Tiêu đề</label>
             <div class="col-sm-10">
-                <?=$this->Form->input('name', ['label'=>false, 'class'=>'form-control'])?>
+                <?=$this->Form->input('name', ['label'=>false, 'class'=>'form-control', 'value'=>$cate['Category']['name']])?>
             </div>
         </div>
 
         <div class="form-group">
             <label for="description" class="col-sm-2 control-label">Miêu tả</label>
             <div class="col-sm-10">
-                <?=$this->Form->textarea('description', ['label'=>false, 'class'=>'form-control'])?>
+                <?=$this->Form->textarea('description', ['label'=>false, 'class'=>'form-control', 'value'=>$cate['Category']['description']])?>
             </div>
         </div>
 
         <div class="form-group">
             <label for="link" class="col-sm-2 control-label">Link</label>
             <div class="col-sm-10">
-                <?=$this->Form->input('link', ['label'=>false, 'class'=>'form-control'])?>
+                <?=$this->Form->input('link', ['label'=>false, 'class'=>'form-control', 'value'=>$cate['Category']['link']])?>
             </div>
         </div>
 
         <div class="form-group">
             <label for="sub" class="col-sm-2 control-label">Thư mục cha</label>
             <div class="col-sm-10">
-                <?=$this->Form->select('sub',$sb,array('empty'=>array(''=>"--Main--"), 'class'=>'form-control'));?>  
+                <?=$this->Form->select('sub',$sub,array('empty'=>array(''=>"--Main--"), 'class'=>'form-control'));?>  
             </div>
         </div>
 

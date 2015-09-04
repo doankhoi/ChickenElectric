@@ -23,14 +23,14 @@
     <div class="blog-masthead navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">Chicken Electric</a>
+          <?=$this->Html->link('Chicken Electric', ['controller'=>'frontends', 'action'=>'home'], ['class'=>'navbar-brand'])?>
         </div>
         <nav class="blog-nav">
-          <?=$this->Html->link('Trang chủ', ['controller'=>'articles', 'action'=>'index'], ['class'=>'blog-nav-item active'])?>
-          <?php foreach($listCategories as $cate): ?>
-              <?=$this->Html->link($cate->name, ['controller'=>'articles', 'action'=>'cate', $cate->id], ['class'=>'blog-nav-item'])?>
+          <?=$this->Html->link('Trang chủ', ['controller'=>'frontends', 'action'=>'home'], ['class'=>'blog-nav-item active'])?>
+          <?php foreach($cates as $cate): ?>
+              <?=$this->Html->link($cate['Category']['name'], ['controller'=>'frontends', 'action'=>'listcate', $cate['Category']['id']], ['class'=>'blog-nav-item'])?>
           <?php endforeach;?>
-          <a class="blog-nav-item" href="#">Tác giả</a>
+          <?=$this->Html->link('Contact', ['controller'=>'frontends', 'action'=>'contact'], ['class'=>'blog-nav-item'])?>
         </nav>
       </div>
     </div>

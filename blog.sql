@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 02, 2015 at 07:09 PM
+-- Generation Time: Sep 04, 2015 at 05:49 AM
 -- Server version: 5.6.25
 -- PHP Version: 5.6.11
 
@@ -101,9 +101,9 @@ CREATE TABLE IF NOT EXISTS `articles` (
   `created` datetime NOT NULL,
   `modified` datetime DEFAULT NULL,
   `users_id` int(11) DEFAULT NULL,
-  `status` bit(1) DEFAULT NULL,
+  `status` tinyint(4) DEFAULT NULL,
   `active` tinyint(4) DEFAULT NULL,
-  `descripition` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `description` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   `view` int(11) DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
@@ -111,8 +111,8 @@ CREATE TABLE IF NOT EXISTS `articles` (
 -- Dumping data for table `articles`
 --
 
-INSERT INTO `articles` (`id`, `title`, `body`, `category_id`, `created`, `modified`, `users_id`, `status`, `active`, `descripition`, `view`) VALUES
-(5, 'sdsd', '<p>dsdsd</p>', NULL, '2015-09-02 07:05:59', '2015-09-02 07:05:59', 10, b'1', 1, NULL, 0);
+INSERT INTO `articles` (`id`, `title`, `body`, `category_id`, `created`, `modified`, `users_id`, `status`, `active`, `description`, `view`) VALUES
+(5, 'Bài này mới toanh', '<p>dsdsd</p>', 5, '2015-09-02 07:05:59', '2015-09-03 17:36:29', 10, 1, 1, '', 0);
 
 -- --------------------------------------------------------
 
@@ -127,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `audits` (
   `updated` datetime NOT NULL,
   `active` tinyint(4) NOT NULL,
   `users_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `audits`
@@ -146,7 +146,10 @@ INSERT INTO `audits` (`id`, `action`, `created`, `updated`, `active`, `users_id`
 (10, 'Thêm người dùng: ', '2015-09-02 01:13:11', '2015-09-02 01:13:11', 1, 10),
 (11, 'Thêm người dùng: ', '2015-09-02 01:42:18', '2015-09-02 01:42:18', 1, 10),
 (12, 'Thêm người dùng: ', '2015-09-02 01:42:42', '2015-09-02 01:42:42', 1, 10),
-(13, 'Thay đổi trạng thái người dùng: osbkca699', '2015-09-02 02:11:49', '2015-09-02 02:11:49', 1, 10);
+(13, 'Thay đổi trạng thái người dùng: osbkca699', '2015-09-02 02:11:49', '2015-09-02 02:11:49', 1, 10),
+(14, 'Thay đổi trạng thái người dùng: osbkca699', '2015-09-03 05:24:11', '2015-09-03 05:24:11', 1, 10),
+(15, 'Thay đổi trạng thái người dùng: osbkca699', '2015-09-03 05:25:54', '2015-09-03 05:25:54', 1, 10),
+(16, 'Thay đổi trạng thái người dùng: osbkca699', '2015-09-03 05:26:03', '2015-09-03 05:26:03', 1, 10);
 
 -- --------------------------------------------------------
 
@@ -156,24 +159,24 @@ INSERT INTO `audits` (`id`, `action`, `created`, `updated`, `active`, `users_id`
 
 CREATE TABLE IF NOT EXISTS `categories` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `description` varchar(255) DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `sub` int(11) NOT NULL,
-  `status` bit(1) NOT NULL,
+  `status` tinyint(4) NOT NULL,
   `active` tinyint(4) NOT NULL,
-  `link` varchar(300) NOT NULL,
+  `link` varchar(300) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `created` datetime NOT NULL,
-  `modified` datetime DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `modified` datetime DEFAULT NULL,
+  `description` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`id`, `name`, `description`, `sub`, `status`, `active`, `link`, `created`, `modified`) VALUES
-(1, 'Coder', 'Nơi chia sẻ kiến thức lập trình', 0, b'0', 0, '', '2015-08-25 09:53:58', '2015-08-25 09:53:58'),
-(2, 'Suy ngẫm', 'Tập hợp các bài viết đáng phải suy ngẫm', 0, b'0', 0, '', '2015-08-25 10:04:32', '2015-08-25 10:04:32'),
-(3, 'Tào lao', 'Các bài viết được góp nhặt trên internet.', 0, b'0', 0, '', '2015-08-25 10:05:36', '2015-08-25 10:05:36');
+INSERT INTO `categories` (`id`, `name`, `sub`, `status`, `active`, `link`, `created`, `modified`, `description`) VALUES
+(5, 'Coder', 0, 1, 1, '', '2015-09-03 12:31:42', '2015-09-04 05:36:38', '<p>Chia sẻ kiến thức lập tr&igrave;nh, học tập.</p>'),
+(6, 'Suy ngẫm', 0, 1, 1, '', '2015-09-03 05:26:42', '2015-09-03 05:26:42', ''),
+(7, 'Tào lao', 0, 1, 1, '', '2015-09-03 05:27:11', '2015-09-03 05:27:11', '');
 
 -- --------------------------------------------------------
 
@@ -203,7 +206,9 @@ CREATE TABLE IF NOT EXISTS `galleries` (
   `ordered` int(4) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
-  `active` bit(1) DEFAULT NULL
+  `active` tinyint(4) DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `link` varchar(200) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -251,7 +256,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `created`, `modified`, `email`, `active`, `avatar`, `info`, `status`, `type`) VALUES
 (10, 'doankhoi', '$2a$10$hRZh/VR6KmBTgmkzT8p4weB2m0vabjIw64QS7oVoA3fonFoxj5PLC', '2015-09-01 05:03:53', '2015-09-01 05:03:53', 'doanngockhoi93@gmail.com', 1, 'noavatar.jpg', NULL, 0, 'admin'),
-(11, 'osbkca699', '$2a$10$6XxgQIfbWQ/drCsQ/cUyV.SGqi17P0nlDjB4W.yMSKH4I8NLbRLFG', '2015-09-01 05:29:11', '2015-09-02 14:11:49', 'osbkca@gmail.com', 0, 'noavatar.jpg', NULL, 0, 'author'),
+(11, 'osbkca699', '$2a$10$6XxgQIfbWQ/drCsQ/cUyV.SGqi17P0nlDjB4W.yMSKH4I8NLbRLFG', '2015-09-01 05:29:11', '2015-09-03 17:26:03', 'osbkca@gmail.com', 1, 'noavatar.jpg', NULL, 0, 'author'),
 (12, 'doandat90', '$2a$10$/hFj8cV71y2gdA3GgRedMuy58f.SVynkKI3f6rZIz/bTpX5.Zo9oC', '2015-09-02 12:49:58', '2015-09-02 12:52:13', 'doandat@gmail.com', 1, 'noavatar.jpg', NULL, 1, 'author');
 
 --
@@ -349,12 +354,12 @@ ALTER TABLE `articles`
 -- AUTO_INCREMENT for table `audits`
 --
 ALTER TABLE `audits`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `comments`
 --

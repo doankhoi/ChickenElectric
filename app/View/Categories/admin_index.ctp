@@ -14,7 +14,7 @@ $this->end();
             <tr>
                 <th>STT</th>
                 <th><?= $this->Paginator->sort('name', 'Tên') ?></th>
-                <th><?= $this->Paginator->sort('status','Trạng thái')?></th>
+                <th><?= $this->Paginator->sort('status','Xuất bản')?></th>
                 <th><?= $this->Paginator->sort('created', 'Ngày tạo') ?></th>
                 <th><?= $this->Paginator->sort('modified', 'Ngày chỉnh sửa') ?></th>
                 <th>Thao tác</th>
@@ -29,16 +29,16 @@ $this->end();
                 <td>
                     <?php 
                         if($category['Category']['status'] == 1){
-                            echo $this->Html->link('Ẩn', ['controller'=>'categories', 'action'=>'showhide', $category['Category']['id']]);
+                            echo $this->Form->postLink('Ẩn', ['controller'=>'categories', 'action'=>'showhide', $category['Category']['id']]);
                         }else{
-                            echo $this->Html->link('Hiện', ['controller'=>'categories', 'action'=>'showhide', $category['Category']['id']]);
+                            echo $this->Form->postLink('Hiện', ['controller'=>'categories', 'action'=>'showhide', $category['Category']['id']]);
                         }
                     ?>
                 </td>
                 <td><?= $category['Category']['created']  ?></td>
                 <td><?= $category['Category']['modified']  ?></td>
                 <td>
-                    <?=$this->Html->link('chỉnh sửa',
+                    <?=$this->Html->link('chỉnh sửa | ',
                         ['controller'=>'categories', 'action'=>'edit', h($category['Category']['id'])]
                     );
                     ?>

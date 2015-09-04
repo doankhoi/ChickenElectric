@@ -1,6 +1,6 @@
 <?php 
 	$this->assign('title', 'Quản lý bài viết');
-	$this->assign('sub_header', 'Danh sách bài viết');
+	$this->assign('sub_header', 'Danh sách bài viết deactive');
 
 	$this->start('sidebar_dashboard');
 	echo $this->element('sidebar_article');
@@ -39,13 +39,17 @@
                 <td><?= h($article['Article']['created']) ?></td>
                 <td><?= h($article['Article']['modified']) ?></td>
                 <td>
-                    <?=$this->Html->link('chỉnh sửa | ',
+                    <?=$this->Html->link('chi tiết',
+                        ['prefix'=>false, 'controller'=>'articles', 'action'=>'view', h($article['Article']['id'])],
+                        ['title'=>'Xem chi tiết'])
+                    ?>
+                    <?=$this->Html->link('chỉnh sửa',
                         ['controller'=>'articles', 'action'=>'edit', h($article['Article']['id'])],
                         ['title'=>'Chỉnh sửa bài viết']);
                     ?>
-                    <?=$this->Form->postLink('deactive',
+                    <?=$this->Form->postLink('active',
                         ['controller'=>'articles', 'action'=>'delete', h($article['Article']['id'])],
-                        ['confirm'=>'Bạn chắc chắn muốn deactive bài viết?']);
+                        ['confirm'=>'Bạn chắc chắn muốn active bài viết ?']);
                     ?>
                 </td>
             </tr>

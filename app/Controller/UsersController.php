@@ -114,7 +114,7 @@ class UsersController extends AppController
 		if($this->User->save($this->request->data)){
 			$now = date('Y:m:d h:i:s');
 			$this->saveAudit('Thay đổi trạng thái người dùng: '.$user['User']['username'], $now);
-			$this->redirect(['action'=>'index']);
+			$this->redirect($this->referer());
 		}
 	}
 

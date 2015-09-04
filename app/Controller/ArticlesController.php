@@ -46,6 +46,80 @@ class ArticlesController extends AppController {
 		}
 	}
 
+	public function admin_edit($id=null){
+		$article = $this->Article->find('first', ['conditions'=>['id'=>$id], 'recursive'=>-1]);
+		if($article['Article']['id'] == ''){
+			$this->redirect(['action'=>'index']);
+		}
+
+		$this->set('article', $article);
+		$cates = $this->_getAllCategories();
+		$this->set('cates', $cates);
+
+		if($this->request->is('post')){
+			$this->Article->set('id', $id);
+			$now = date('Y:m:d h:i:s');
+			$this->Article->set('modified', $now);
+
+			if($this->Article->save($this->request->data)){
+				$this->Flash->set('Chỉnh sửa thành công', ['element' => 'success']);
+				$this->redirect(['action'=>'index']);
+			}else{
+				$this->Flash->set('Thao tác chỉnh sửa lỗi. Kiểm tra lại', ['element'=>'error']);
+			}
+		}
+	}
+
+	public function admin_listdeactive(){
+		$this->paginate = [
+			'conditions'=>['Article.active'=>0],
+			'limit'=>10,
+			'order'=>['modified'=>'desc']
+		];
+
+		$data = $this->paginate('Article');
+		$this->set('articles', $data);
+	}
+
+	public function admin_publish($id=null){
+		$article = $this->Article->find('first', [
+			'conditions'=> ['id'=>$id],
+			'recursive'=>-1
+		]);
+
+		if($article['Article']['id'] == ''){
+			$this->redirect(['action'=>'index']);
+		}
+
+		$this->Article->set('id', $id);
+		if($article['Article']['status'] == 1){
+			$this->Article->set('status', 0);
+		}else{
+			$this->Article->set('status', 1);
+		}
+
+		if($this->Article->save($this->request->data)){
+			$this->redirect($this->referer());
+		}
+	}
+
+	public function admin_delete($id=null){
+		$article = $this->Article->find('first', ['conditions'=>['id'=>$id], 'recursive'=>-1]);
+		if($article['Article']['id'] == ''){
+			$this->redirect(['action'=>'index']);
+		}
+		$this->Article->set('id', $id);
+		if($article['Article']['active'] == 1){
+			$this->Article->set('active', 0);
+		}else{
+			$this->Article->set('active', 1);
+		}
+
+		if($this->Article->save($this->request->data)){
+			$this->redirect($this->referer());
+		}
+	}
+
 	function _getAllCategories(){
 		$cates = $this->Category->find('all', ['conditions'=>['active'=>1]]);
 		$result = array();

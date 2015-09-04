@@ -46,6 +46,26 @@ class CategoriesController extends AppController {
 		}
 	}
 
+	public function admin_edit($id=null){
+		$this->set('sub',$this->Category->find('list',array(
+                                    'conditions'=>array(
+                                        'Category.sub'=>0,
+                                        'active'=>1
+                                        ))));
+		$cate = $this->Category->find('first', ['conditions'=>['id'=>$id], 'recursive'=>-1]);
+		if($cate['Category']['id'] == ''){
+			$this->redirect(['action'=>'index']);
+		}
+
+		$this->set('cate', $cate);
+		if($this->request->is('post')){
+			$this->Category->set('id', $id);
+			if($this->Category->save($this->request->data)){
+				$this->redirect(['action'=>'index']);
+			}
+		}
+	}
+
 
 	public function admin_showhide($id=null){
 		$cate = $this->Category->find('first', ['conditions'=>['id'=>$id]]);

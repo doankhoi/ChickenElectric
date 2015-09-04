@@ -32,15 +32,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <?=$this->Html->link('Chicken Electric', ['controller'=>'articles', 'action'=>''], ['class'=>'navbar-brand'])?>
+              <?=$this->Html->link('Chicken Electric', ['controller'=>'frontends', 'action'=>'home'], ['class'=>'navbar-brand'])?>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
-                <li><?=$this->Html->link('Trang chủ', ['controller'=>'articles', 'action'=>'index', 'cat'=>''], ['class'=>'active'])?></li>
-                <li><?=$this->Html->link('Coder', ['controller'=>'articles', 'action'=>'index', 'cat'=>'coder'])?></li>
-                <li><?=$this->Html->link('Suy ngẫm', ['controller'=>'articles', 'action'=>'index', 'cat'=>'suy ngẫm'])?></li>
-                <li><?=$this->Html->link('Tào lao', ['controller'=>'articles', 'action'=>'index', 'cat'=>'tào lao'])?></li>
-                <li><a href="#about">Tác giả</a></li>
+                <li><?=$this->Html->link('Trang chủ', ['controller'=>'frontends', 'action'=>'home'], ['class'=>'active'])?></li>
+                <?php foreach($cates as $cate):?>
+                  <li><?=$this->Html->link($cate['Category']['name'], ['controller'=>'frontends', 'action'=>'listcate', $cate['Category']['id']])?></li>
+                <?php endforeach;?>
+                <li><?=$this->Html->link('Contact', ['controller'=>'frontends', 'action'=>'contact'])?></li>
               </ul>
             </div>
           </div>
@@ -142,8 +142,14 @@
 
       <div class="row featurette">
         <div class="col-md-7">
-          <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          <h2 class="featurette-heading"><a href="#">First featurette heading.</a></h2>
+          <p class="lead">
+            <ul><a href="#">This is ok</a></ul>
+            <ul><a href="#">This is ok</a></ul>
+            <ul><a href="#">This is ok</a></ul>
+            <ul><a href="#">This is ok</a></ul>
+            
+          </p>
         </div>
         <div class="col-md-5">
           <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
